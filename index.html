@@ -8,7 +8,7 @@
   <script src="./main.js" defer></script>
 </head>
 <body>
-  <div class="appContainer">
+  <div class="appContainer" id="container">
     <div class="header">
       <img src="../src/img/cpu.svg" alt="app-logo">
       <h1>Matrix Todo List</h1>
@@ -24,8 +24,8 @@
       </div>
       <div class="add-projects">
         <h2>Add Project</h2>
-        <input type="text">
-        <button type="button">ADD</button>
+        <input id="input-add-project" type="text">
+        <button id="add-project" type="button">ADD</button>
       </div>
     </div>
     <div class="content">
@@ -34,14 +34,16 @@
       <p>Project made it by Augusto Seta</p>
     </div>
 
-    <div class="error-modal">
+
+
+    <!-- <div class="error-modal">
       <div class="error-header">
         <button><img src="../src/img/close.svg" alt="close"></button>
       </div>
       <div class="error-content">
         <p>ERROR { FILL INPUTS }</p>
       </div>
-    </div>
+    </div> -->
   </div>
 </body>
 </html>
