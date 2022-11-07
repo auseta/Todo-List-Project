@@ -136,87 +136,29 @@ button:hover {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
   margin-right: 0;
-  padding: 0 50px 0 120px;
+  padding: 50px;
+  padding-left: 120px;
   display: grid;
+  justify-items: flex-start;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 6fr;
+  grid-template-rows: 1fr 1fr 6fr;
   border: 5px inset var(--green-color);
 }
 
-.content-title {
-  display: flex;
-  font-size: 24px;
-  justify-content: start;
-  align-items: center;
+.content h2 {
+  font-size: 32px;
 }
 
-.content-title h2 {
-  font-weight: 100;
-}
-
-.tasks-section-content {
-  display: grid;
-  grid-template-rows: repeat(10, 1fr);
-  gap: 15px;
-  grid-auto-rows: 1fr;
-  align-items: center;
-  justify-items: start;
-}
-
-.tasks-section-content button {
-  padding: 3px 10px;
-  border: 5px inset var(--green-color);
-  background-color: var(--bg-color);
-  font-size: 24px;
-}
-
-.tasks-section-content button:hover {
-  color: var(--bg-color);
-  background-color: #03a061c6;
-}
-
-.tasks-section-content button:active {
-  border-style: outset;
-  background-color: #095c3bc6;
-}
-
-.task-fields {
-  display: flex;
-  gap: 5px;
-}
-
-.tasks-section-content select {
-  background-color: var(--bg-color);
-  border: 5px inset var(--green-color);
+.content button {
+  height: 40px;
+  font-size: 20px;
   padding: 5px 15px;
-  width: 150px;
-  font-size: 24px;
 }
 
-.tasks-section-content input {
-  background-color: var(--bg-color);
-  border: 5px inset var(--green-color);
-  padding: 5px 15px;
-  width: 350px;
-  font-size: 24px;
-}
-
-.tasks-section-content input[type="date"] {
-  padding: 0;
-  width: 200px;
-  padding: 4px 0;
-  padding-left: 25px;
-  outline: none;
-}
-
-.tasks-section-content input[type='checkbox'] {
-  appearance: none;
-  width: 50px;
-  height: 50px;
-}
-
-.tasks-section-content input[type='checkbox']:checked::before {
-  content: '✔';
+.content .tasks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .footer {
@@ -273,4 +215,106 @@ button:hover {
   font-size: 20px;
   border: 5px inset var(--green-color);
   border-top: none;
+}
+
+/** ADD TASK MODAL  */
+
+.task-modal-container {
+  position: absolute;
+  font-family: 'Antic Slab', sans-serif;
+  height: 400px;
+  width: 380px;
+  display: grid;
+  top: 170px;
+  left: 300px;
+  background-color: var(--bg-color);
+  border: 5px inset var(--green-color);
+  grid-template-columns: 1fr 1fr;
+  padding: 10px;
+  gap: 10px;
+  align-items: center;
+  color: var(--green-color);
+}
+
+.task-modal-container input, .task-modal-container select {
+  border: 5px inset var(--green-color);
+  background-color: var(--bg-color);
+  color: var(--green-color);
+  height: 35px;
+  font-size: 18px;
+}
+
+.task-modal-containerr input::placeholder {
+  color: #03a061c5;
+}
+
+.task-modal-container input[type='checkbox'] {
+  width: 30px;
+  height: 30px;
+  appearance: none;
+}
+
+.task-modal-container input[type='checkbox']:checked::before {
+  content: 'X';
+  padding-top: 6px;
+  padding-left: 4px;
+  font-size: 18px;
+}
+
+.task-modal-container button {
+  padding: 5px 15px;
+  width: 100px;
+  font-size: 18px;
+  font-weight: bolder;
+  height: 40px;
+}
+
+/* task */
+
+.task {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  justify-content: center;
+  color: #03a062;
+  padding: 10px 0;
+  padding-left: 25px;
+  width: 800px;
+  border: 5px inset #03a062;
+  background-color: #000000;
+}
+
+.delete-task {
+  display: flex;
+  justify-content: end;
+  padding-bottom: 0;
+  padding-right: 25px;
+}
+
+.delete-task button {
+  height: 32px;
+  width: 32px;
+  padding: 0px;
+}
+
+.task h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.task p {
+  margin: 0;
+  padding: 0;
+}
+
+.task-description {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+}
+
+.task-state {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
