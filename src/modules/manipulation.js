@@ -2,7 +2,14 @@ import { Task } from "./task";
 
 const d = document;
 const content = d.querySelector('.content');
-let id = 1;
+let id;
+
+if (localStorage.getItem('inboxID')) {
+  id = JSON.parse(localStorage.getItem('inboxID')) + 1;
+} else {
+  localStorage.setItem('inboxID', JSON.stringify(1))
+  id = JSON.parse(localStorage.getItem('inboxID'))
+}
 
 //! ↓↓ Modal window template ↓↓
 
@@ -47,6 +54,7 @@ const addTask = () => {
         taskNotes = d.querySelector('#task-notes');
 
   Task.saveTask(id,taskTitle.value, taskDesc.value, taskDate.value, taskNotes.value)
+  localStorage.setItem('inboxID', id)
   id++
   closeModal()
   Task.renderTasksStorage()
