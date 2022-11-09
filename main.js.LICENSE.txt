@@ -1,5 +1,0 @@
-//! ↑↑ Modal window template  ↑↑
-
-//! ↓↓ Modal Button Methods ↓↓
-
-//! ↓↓ Modal window template ↓↓
