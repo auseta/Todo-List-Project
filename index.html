@@ -7,25 +7,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Todo List</title>
   <script src="./main.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
 
 <body>
   <div class="container">
     <div class='header'>
-      <img src='../dist/img/cpu.svg' alt="logo">
+      <i class="bi bi-cpu"></i>
       <h1>Matrix Todo List</h1>
     </div>
 
     <div class='aside'>
 
       <div class='sections'>
-        <a id='inbox'><img src="../dist/img/inbox.svg" alt="inbox">Inbox</a>
-        <a id='today'><img src="../dist/img/today.svg" alt="today">Today</a>
-        <a id='week'><img src="../dist/img/week.svg" alt="this-week">This Week</a>
+        <a id='inbox'><i class="bi bi-inbox"></i> Inbox</a>
+        <a id='today'><i class="bi bi-calendar-event"></i> Today</a>
+        <a id='week'><i class="bi bi-calendar3-week"></i> This Week</a>
       </div>
 
       <div class='projects-section'>
-        <p><img src=''>Projects</p>
+        <p><i class="bi bi-folder2"></i> Projects</p>
         <div clas='projects'></div>
         <div class='add-project-controls'>
           <input type='text' id='input-project-name'>
