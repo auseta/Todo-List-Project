@@ -298,6 +298,7 @@ button:hover {
 }
 
 .task h2 {
+  font-size: 32px;
   margin: 0;
   padding: 0;
 }
@@ -317,4 +318,16 @@ button:hover {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.task-state input {
+  appearance: none;
+  border: 3px inset var(--green-color);
+  height: 20px;
+  width: 20px;
+}
+
+.task-state input:checked::before {
+  content: 'X';
+  padding-left: 2px;
 }
