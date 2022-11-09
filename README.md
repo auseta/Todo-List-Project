@@ -1,6 +1,6 @@
 # Todo-List-Project
 
---TODO-
+--TODO--
 
 Live Demo 👉🏻 https://auseta.github.io/Todo-List-Project/
 
