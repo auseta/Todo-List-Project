@@ -66,8 +66,8 @@ button:hover {
   border: 5px inset var(--green-color);
 }
 
-.header img {
-  width: 50px;
+.header i {
+  font-size: 60px;
 }
 
 .header h1 {
@@ -115,9 +115,12 @@ button:hover {
   cursor: pointer;
 }
 
-.aside .sections a img, .projects-section img {
-  vertical-align: -4px;
-  margin-right: 4px;
+.aside .sections a i {
+  font-size: 28px;
+}
+
+.aside .projects-section i {
+  font-size: 28px;
 }
 
 .aside .projects-section .add-project-controls {
