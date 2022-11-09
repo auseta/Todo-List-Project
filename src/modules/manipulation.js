@@ -1,8 +1,7 @@
 import { Task } from "./task";
 
 const d = document;
-const content = d.querySelector('.content')
-const taskList = [];
+const content = d.querySelector('.content');
 let id = 1;
 
 //! ↓↓ Modal window template ↓↓
@@ -26,18 +25,13 @@ const taskModal = () => {
       </select>
       <label for='task-notes'>Notes: </label>
       <input type='text' id='task-notes' placeholder='add a note' maxlength='24'>
-      <label for='task-state'>Completed: </label>
-      <input type='checkbox' id='task-state'>
       <button id='add-task-button' type='button'>Add</button>
       <button id='close-task-modal' type='button'>Cancel</button>
   `;
-
   tasksContainer.append(taskModalContainer);
 }
 
 //! ↑↑ Modal window template  ↑↑
-
-
 
 //! ↓↓ Modal Button Methods ↓↓
 
@@ -46,49 +40,21 @@ const closeModal = () => {
   modalContainer.remove()
 }
 
-//* Inicio: Eliminar tareas de los datos y la UI
-
-const deleteTask = () => {
-  const taskContainers = d.querySelectorAll('.task');
-  const taskDeleteButtons = d.querySelectorAll('.delete-task');
-
-  taskDeleteButtons.forEach( deleteTaskButton => {
-    deleteTaskButton.addEventListener('click', () => {
-      const taskContainer = deleteTaskButton.parentNode;
-      taskList.forEach( task => {
-        if (task.id === +taskContainer.id) {
-          taskList.splice(taskList.indexOf(task), 1);
-          taskContainer.remove()
-          console.log(taskList);
-        }
-      })
-    })
-  })
-
-}
-
-//* Fin: Eliminar tareas de los datos y la UI;
-
 const addTask = () => {
   const taskTitle = d.querySelector('#task-title'),
         taskDesc = d.querySelector('#task-description'),
         taskDate = d.querySelector('#task-date'),
-        taskNotes = d.querySelector('#task-notes'),
-        taskCompleted = d.querySelector('#task-state'),
-        taskCompletedValue = taskCompleted.checked === true ? true : false
+        taskNotes = d.querySelector('#task-notes');
 
-  taskList.push(Task.saveTask(id,taskTitle.value, taskDesc.value, taskDate.value, taskNotes.value, taskCompletedValue))
+  Task.saveTask(id,taskTitle.value, taskDesc.value, taskDate.value, taskNotes.value)
   id++
   closeModal()
-  Task.renderTasks(taskList);
-  deleteTask()
+  Task.renderTasksStorage()
+  Task.deleteTaskStorage()
+  Task.setState()
 }
 
-
-
 //! ↑↑ Modal Button Methods ↑↑
-
-
 
 //! ↓↓ Modal Button Actions ↓↓
 
@@ -105,8 +71,6 @@ const modalButtons = () => {
 //! ↑↑ Modal Button Actions ↑↑
 
 
-
-
 //* ↓ HERE IS WHERE THE MAGIC HAPPENDS! ↓
 
 const openModalTask = () => {
@@ -118,7 +82,6 @@ const openModalTask = () => {
 }
 
 export const openInbox = () => {
-  content.innerHTML = '';
   const inboxH2 = d.createElement('h2');
   const inboxAddButton = d.createElement('button');
   const tasksContainer = d.createElement('div');
@@ -126,8 +89,10 @@ export const openInbox = () => {
   inboxAddButton.textContent = '+Add task';
   inboxAddButton.id='open-task-modal'
   inboxH2.textContent = 'Inbox';
+  content.innerHTML = '';
   content.append(inboxH2, inboxAddButton, tasksContainer);
-  Task.renderTasks(taskList)
+  Task.renderTasksStorage()
+  Task.deleteTaskStorage()
+  Task.setState()
   openModalTask()
-
 }
