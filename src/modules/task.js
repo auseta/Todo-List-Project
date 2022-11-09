@@ -48,7 +48,7 @@ export class Task {
             <span>Date: ${ task.date === 'No date' ? 'No date' : format( new Date(task.date), 'MM/dd/yyyy' )} </span>
           </div>
           <div class='task-notes'>
-            <span>${ task.notes }</span>
+            <span>Notes: ${ task.notes }</span>
           </div>
           <div class='task-state'>
             <label for='state'>Completed: </label>
