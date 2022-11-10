@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 
 const d = document;
-let taskListStorage = []
+let taskListStorage = [];
 
 
 if (localStorage.getItem('todos')) {
@@ -78,17 +78,72 @@ export class Task {
 
   static setState() {
     const tasksStates = d.querySelectorAll('#state');
+
     tasksStates.forEach( checkbox => {
       const checkBoxContainer = checkbox.parentNode.parentNode;
+      const taskTitle = checkBoxContainer.firstElementChild.nextElementSibling
+      taskListStorage.forEach(task => {
+        if (task.id == checkBoxContainer.id) {
+          if(checkbox.checked) {
+            taskTitle.style.cssText = 'text-decoration: line-through;'
+            task.completed = true
+          } else {
+            taskTitle.style.cssText = ''
+            task.completed = false
+          }
+          this.saveInStorage()
+        }
+      })
+    })
+
+    tasksStates.forEach( checkbox => {
+      const checkBoxContainer = checkbox.parentNode.parentNode;
+      const taskTitle = checkBoxContainer.firstElementChild.nextElementSibling
       checkbox.addEventListener('click', () => {
         taskListStorage.forEach(task => {
           if (task.id == checkBoxContainer.id) {
-            checkbox.checked ? task.completed = true : task.completed = false;
+            if(checkbox.checked) {
+              taskTitle.style.cssText = 'text-decoration: line-through;'
+              task.completed = true
+            } else {
+              taskTitle.style.cssText = ''
+              task.completed = false
+            }
             this.saveInStorage()
           }
         })
       })
     })
   }
-
 };
+
+export class TaskToday {
+  
+  static renderTaskToday(task) {
+    const tasksTodayContainer = d.querySelector('.tasks-today-container');
+    const taskContainer = d.createElement('div')
+    taskContainer.className='task';
+    taskContainer.id = task.id;
+    taskContainer.innerHTML = `
+      <div class='delete-task'>
+        <button id='delete-task'>X</button>
+      </div>
+      <div class='task-title'>
+        <h2>${task.title}</h2>
+      </div>
+      <div class='task-description'>
+        <span>Description: ${task.description}</span>
+        <span>Date: ${ task.date === 'No date' ? 'No date' : format( new Date(task.date), 'MM/dd/yyyy' )} </span>
+      </div>
+      <div class='task-notes'>
+        <span>Notes: ${ task.notes }</span>
+      </div>
+      <div class='task-state'>
+        <label for='state'>Completed: </label>
+        <input type='checkbox' id='state' ${ task.completed ? 'checked' : '' } >
+      </div>
+    `
+    tasksTodayContainer.append(taskContainer)
+  }
+
+}
