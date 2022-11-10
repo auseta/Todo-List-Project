@@ -1,4 +1,5 @@
-import { Task } from "./task";
+import { Task, TaskToday } from "./task"
+import { format } from "date-fns";
 
 const d = document;
 const content = d.querySelector('.content');
@@ -89,6 +90,22 @@ const openModalTask = () => {
   })
 }
 
+
+const loadToday = () => {
+  const todayTaskList = localStorage.getItem('todos') ? [...JSON.parse(localStorage.getItem('todos'))] : [];
+  const today = format(new Date(), 'yyyy-MM-dd')
+  todayTaskList.forEach( task => {
+    if (task.date !== 'No date') {
+      if (task.date === today) {
+        TaskToday.renderTaskToday(task)
+        Task.deleteTaskStorage()
+        Task.setState()
+      }
+    }
+  }) 
+}
+
+
 export const openInbox = () => {
   const inboxH2 = d.createElement('h2');
   const inboxAddButton = d.createElement('button');
@@ -98,9 +115,21 @@ export const openInbox = () => {
   inboxAddButton.id='open-task-modal'
   inboxH2.textContent = 'Inbox';
   content.innerHTML = '';
+  content.style.cssText = 'grid-template-rows: 1fr 1fr 6fr;'
   content.append(inboxH2, inboxAddButton, tasksContainer);
   Task.renderTasksStorage()
   Task.deleteTaskStorage()
   Task.setState()
   openModalTask()
+}
+
+export const openToday = () => {
+  content.innerHTML = '';
+  content.style.cssText = 'grid-template-rows: 1fr 6fr;'
+  const todayH2 = d.createElement('h2');
+  const tasksTodayContainer = d.createElement('div');
+  tasksTodayContainer.className='tasks-today-container'
+  todayH2.textContent = 'Today'
+  content.append(todayH2, tasksTodayContainer)
+  loadToday()
 }
