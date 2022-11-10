@@ -115,6 +115,10 @@ button:hover {
   cursor: pointer;
 }
 
+.aside .sections a:active {
+  background-color: #03a062c6
+}
+
 .aside .sections a i {
   font-size: 28px;
 }
@@ -158,11 +162,12 @@ button:hover {
   padding: 5px 15px;
 }
 
-.content .tasks-container {
+.content .tasks-container, .content .tasks-today-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
 
 .footer {
   display: flex;
