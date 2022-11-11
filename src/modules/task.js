@@ -1,8 +1,7 @@
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 const d = document;
 let taskListStorage = [];
-
 
 if (localStorage.getItem('todos')) {
   taskListStorage = [...JSON.parse(localStorage.getItem('todos'))]
@@ -16,7 +15,6 @@ export class Task {
   }
 
   static saveTask(id, title, description, date, notes) {
-    console.log(taskListStorage);
     taskListStorage.push({
       id: id,
       title: title || 'DEFAULT TITLE' ,
@@ -45,7 +43,7 @@ export class Task {
           </div>
           <div class='task-description'>
             <span>Description: ${task.description}</span>
-            <span>Date: ${ task.date === 'No date' ? 'No date' : format( new Date(task.date), 'MM/dd/yyyy' )} </span>
+            <span>Date: ${ task.date === 'No date' ? 'No date' : format( parseISO(task.date) , 'dd/MM/yyyy' )} </span>
           </div>
           <div class='task-notes'>
             <span>Notes: ${ task.notes }</span>
@@ -117,7 +115,7 @@ export class Task {
   }
 };
 
-export class TaskToday {
+export class TaskSections {
   
   static renderTaskToday(task) {
     const tasksTodayContainer = d.querySelector('.tasks-today-container');
@@ -133,7 +131,7 @@ export class TaskToday {
       </div>
       <div class='task-description'>
         <span>Description: ${task.description}</span>
-        <span>Date: ${ task.date === 'No date' ? 'No date' : format( new Date(task.date), 'MM/dd/yyyy' )} </span>
+        <span>Date: ${ task.date === 'No date' ? 'No date' : format( parseISO(task.date), 'dd/MM/yyyy' )} </span>
       </div>
       <div class='task-notes'>
         <span>Notes: ${ task.notes }</span>
@@ -144,6 +142,45 @@ export class TaskToday {
       </div>
     `
     tasksTodayContainer.append(taskContainer)
+  }
+
+  static renderTaskWeek(task) {
+    const tasksWeekContainer = d.querySelector('.tasks-week-container');
+    const taskContainer = d.createElement('div')
+    taskContainer.className='task';
+    taskContainer.id = task.id;
+    taskContainer.innerHTML = `
+      <div class='delete-task'>
+        <button id='delete-task'>X</button>
+      </div>
+      <div class='task-title'>
+        <h2>${task.title}</h2>
+      </div>
+      <div class='task-description'>
+        <span>Description: ${task.description}</span>
+        <span>Date: ${ task.date === 'No date' ? 'No date' : format( parseISO(task.date), 'dd/MM/yyyy' )} </span>
+      </div>
+      <div class='task-notes'>
+        <span>Notes: ${ task.notes }</span>
+      </div>
+      <div class='task-state'>
+        <label for='state'>Completed: </label>
+        <input type='checkbox' id='state' ${ task.completed ? 'checked' : '' } >
+      </div>
+    `
+    tasksWeekContainer.append(taskContainer)
+  }
+
+}
+
+export class Project {
+
+  static saveProject(name, projectID) {
+    projectsStorage.push({
+      name: name,
+      id: projectID,
+      tasks: []
+    })
   }
 
 }
