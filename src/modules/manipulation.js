@@ -1,5 +1,5 @@
-import { Task, TaskToday } from "./task"
-import { format } from "date-fns";
+import { Task, TaskSections } from "./task"
+import { format, getWeek, parseISO } from "date-fns";
 
 const d = document;
 const content = d.querySelector('.content');
@@ -96,8 +96,8 @@ const loadToday = () => {
   const today = format(new Date(), 'yyyy-MM-dd')
   todayTaskList.forEach( task => {
     if (task.date !== 'No date') {
-      if (task.date === today) {
-        TaskToday.renderTaskToday(task)
+      if (task.date == today) {
+        TaskSections.renderTaskToday(task)
         Task.deleteTaskStorage()
         Task.setState()
       }
@@ -105,6 +105,22 @@ const loadToday = () => {
   }) 
 }
 
+const loadWeek = () => {
+  const weekTaskList = localStorage.getItem('todos') ? [...JSON.parse(localStorage.getItem('todos'))] : [];
+  const thisWeek = getWeek(new Date());
+  weekTaskList.forEach( task => {
+    if (task.date !== 'No date') {
+      if ( getWeek(parseISO(task.date)) === thisWeek) {
+        console.log('today is:', parseISO(task.date));
+        console.log('this week:', thisWeek);
+        console.log('task week:', getWeek(parseISO(task.date)));
+        TaskSections.renderTaskWeek(task)
+        Task.deleteTaskStorage()
+        Task.setState()
+      }
+    }
+  }) 
+}
 
 export const openInbox = () => {
   const inboxH2 = d.createElement('h2');
@@ -115,7 +131,7 @@ export const openInbox = () => {
   inboxAddButton.id='open-task-modal'
   inboxH2.textContent = 'Inbox';
   content.innerHTML = '';
-  content.style.cssText = 'grid-template-rows: 1fr 1fr 6fr;'
+  content.style.cssText = 'grid-template-rows: 50px 50px 6fr;'
   content.append(inboxH2, inboxAddButton, tasksContainer);
   Task.renderTasksStorage()
   Task.deleteTaskStorage()
@@ -125,11 +141,22 @@ export const openInbox = () => {
 
 export const openToday = () => {
   content.innerHTML = '';
-  content.style.cssText = 'grid-template-rows: 1fr 6fr;'
+  content.style.cssText = 'grid-template-rows: 50px 6fr;'
   const todayH2 = d.createElement('h2');
   const tasksTodayContainer = d.createElement('div');
   tasksTodayContainer.className='tasks-today-container'
   todayH2.textContent = 'Today'
   content.append(todayH2, tasksTodayContainer)
   loadToday()
+}
+
+export const openThisWeek = () => {
+  content.innerHTML = '';
+  content.style.cssText = 'grid-template-rows: 50px 6fr;'
+  const weekH2 = d.createElement('h2');
+  const tasksWeekContainer = d.createElement('div');
+  tasksWeekContainer.className='tasks-week-container'
+  weekH2.textContent = 'This week';
+  content.append(weekH2, tasksWeekContainer);
+  loadWeek()
 }
