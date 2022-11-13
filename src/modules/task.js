@@ -2,16 +2,20 @@ import { format, parseISO } from "date-fns";
 
 const d = document;
 let taskListStorage = [];
+export let projectsStorage = [];
 
 if (localStorage.getItem('todos')) {
   taskListStorage = [...JSON.parse(localStorage.getItem('todos'))]
+}
+
+if (localStorage.getItem('projects')) {
+  projectsStorage = [...JSON.parse(localStorage.getItem('projects'))]
 }
 
 export class Task {  
 
   static saveInStorage() {
     localStorage.setItem('todos', JSON.stringify(taskListStorage))
-    taskListStorage = [...JSON.parse(localStorage.getItem('todos'))]
   }
 
   static saveTask(id, title, description, date, notes) {
@@ -175,12 +179,17 @@ export class TaskSections {
 
 export class Project {
 
-  static saveProject(name, projectID) {
+  static saveInProjectsStorage() {
+    localStorage.setItem('projects', JSON.stringify(projectsStorage))
+  }
+
+  static saveProject(name) {
     projectsStorage.push({
       name: name,
-      id: projectID,
+      id: name.split(' ').join('-') ,
       tasks: []
     })
+    this.saveInProjectsStorage()
   }
 
 }
