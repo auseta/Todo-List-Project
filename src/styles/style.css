@@ -115,10 +115,6 @@ button:hover {
   cursor: pointer;
 }
 
-.aside .sections a:active {
-  background-color: #03a062c6
-}
-
 .aside .sections a i {
   font-size: 28px;
 }
@@ -138,6 +134,32 @@ button:hover {
   width: 150px;
 }
 
+.aside .projects-section .projects {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  padding-left: 35px;
+}
+
+.aside .projects-section .projects .project {
+  font-size: 18px;
+}
+
+.aside .projects-section .projects .project a {
+  cursor: pointer;
+}
+
+.aside .projects-section .projects .project button {
+  border: none;
+}
+
+.aside .projects-section .projects .project button:hover {
+  background-color: var(--bg-color);
+  color: #03a062;
+}
+
 .content {
   margin-top: 20px;
   grid-column: 2 / 3;
@@ -146,9 +168,10 @@ button:hover {
   padding: 50px;
   padding-left: 120px;
   display: grid;
+  gap: 15px;
   justify-items: flex-start;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 6fr;
+  grid-template-rows: 50px 50px 6fr;
   border: 5px inset var(--green-color);
 }
 
@@ -162,7 +185,7 @@ button:hover {
   padding: 5px 15px;
 }
 
-.content .tasks-container, .content .tasks-today-container {
+.content .tasks-container, .content .tasks-today-container, .content .tasks-week-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -184,7 +207,7 @@ button:hover {
   font-size: 24px;
 }
 
-.error-modal {
+.modal-error {
   display: grid;
   position: absolute;
   grid-template-rows: 1fr 5fr;
@@ -210,9 +233,6 @@ button:hover {
 
 .error-header button:hover {
   cursor: pointer;
-}
-.error-header button img {
-  width: 35px;
 }
 
 .error-content {
