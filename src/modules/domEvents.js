@@ -1,9 +1,13 @@
 import { openInbox, openToday, openThisWeek } from "./manipulation";
-import { addProject } from "./project";
+import { addProject, createProject, displayModalError } from "./project";
 
 const d = document;
-
+const inputProjectName = d.querySelector('#input-project-name');
+const buttonAddProject = d.querySelector('#add-project-button');
 const inboxSection = d.querySelector('#inbox');
+const todaySection = d.querySelector('#today');
+const weekSection = d.querySelector('#week');
+
 inboxSection.addEventListener('click', () => {
   todaySection.style.cssText = '';
   weekSection.style.cssText = '';
@@ -11,7 +15,7 @@ inboxSection.addEventListener('click', () => {
   openInbox()
 })
 
-const todaySection = d.querySelector('#today');
+
 todaySection.addEventListener('click', () => {
   inboxSection.style.cssText = '';
   weekSection.style.cssText = '';
@@ -19,7 +23,7 @@ todaySection.addEventListener('click', () => {
   openToday()
 })
 
-const weekSection = d.querySelector('#week');
+
 weekSection.addEventListener('click', () => {
   inboxSection.style.cssText = '';
   todaySection.style.cssText = '';
@@ -27,17 +31,19 @@ weekSection.addEventListener('click', () => {
   openThisWeek()
 })
 
-const inputProjectName = d.querySelector('#input-project-name');
-const buttonAddProject = d.querySelector('#add-project-button');
 inputProjectName.addEventListener('click', () => {
   inboxSection.style.cssText = '';
   weekSection.style.cssText = '';
   todaySection.style.cssText = '';
 })
 
+addProject()
+
 buttonAddProject.addEventListener('click', () => {
   inboxSection.style.cssText = '';
   weekSection.style.cssText = '';
   todaySection.style.cssText = '';
-  inputProjectName.value ? addProject() : console.log('chau')
+  if ( inputProjectName.value ) {
+    createProject()
+  }
 })
