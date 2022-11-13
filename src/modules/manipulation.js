@@ -12,7 +12,6 @@ if (localStorage.getItem('inboxID')) {
   id = JSON.parse(localStorage.getItem('inboxID'))
 }
 
-//! ↓↓ Modal window template ↓↓
 
 const taskModal = () => {
   const tasksContainer = d.querySelector('.tasks-container');
@@ -39,9 +38,6 @@ const taskModal = () => {
   tasksContainer.append(taskModalContainer);
 }
 
-//! ↑↑ Modal window template  ↑↑
-
-//! ↓↓ Modal Button Methods ↓↓
 
 const closeModal = () => {
   const modalContainer = d.querySelector('.task-modal-container')
@@ -63,9 +59,6 @@ const addTask = () => {
   Task.setState()
 }
 
-//! ↑↑ Modal Button Methods ↑↑
-
-//! ↓↓ Modal Button Actions ↓↓
 
 const modalButtons = () => {
 
@@ -77,10 +70,6 @@ const modalButtons = () => {
 
 }
 
-//! ↑↑ Modal Button Actions ↑↑
-
-
-//* ↓ HERE IS WHERE THE MAGIC HAPPENDS! ↓
 
 const openModalTask = () => {
   const inboxAddButton = d.querySelector('#open-task-modal')
@@ -111,9 +100,6 @@ const loadWeek = () => {
   weekTaskList.forEach( task => {
     if (task.date !== 'No date') {
       if ( getWeek(parseISO(task.date)) === thisWeek) {
-        console.log('today is:', parseISO(task.date));
-        console.log('this week:', thisWeek);
-        console.log('task week:', getWeek(parseISO(task.date)));
         TaskSections.renderTaskWeek(task)
         Task.deleteTaskStorage()
         Task.setState()
