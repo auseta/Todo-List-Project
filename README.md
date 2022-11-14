@@ -4,6 +4,7 @@ This project is about a to-do list. When entering a task in the Inbox section we
 The application makes use of the localStorage API, so the data persists in the browser when the app is reopened; the date-fns library for date manipulation and webpack to enable module import/export and transpile the code into a js file within a distribution folder.
 
 Languages: JS / HTML / CSS
+
 Tools and Libraries: Bootstrap Icons / date-fns / webpack
 
 Live Demo 👉🏻 https://auseta.github.io/Todo-List-Project/
