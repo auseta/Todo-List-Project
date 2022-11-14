@@ -1,5 +1,5 @@
-import { openInbox, openToday, openThisWeek } from "./manipulation";
-import { addProject, createProject, displayModalError } from "./project";
+import { openInbox, openToday, openThisWeek } from './tasks';
+import { addProject, createProject } from "./project";
 
 const d = document;
 const inputProjectName = d.querySelector('#input-project-name');
